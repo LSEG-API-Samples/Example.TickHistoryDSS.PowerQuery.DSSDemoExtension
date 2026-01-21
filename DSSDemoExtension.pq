@@ -16,7 +16,7 @@ Value.WaitFor = (producer as function, interval as function, optional count as n
 // Request authentication token
 Login = (user,pass,currenttime) =>
     let
-        endpoint = "https://selectapi.datascope.refinitiv.com/RestApi/v1/Authentication/RequestToken",
+        endpoint = "https://selectapi.datascope.lseg.com/RestApi/v1/Authentication/RequestToken",
         body = "{""Credentials"": {""Username"": """ & user & """,""Password"": """ & pass & """}}",
         response=Web.Contents(endpoint,[
                         Headers=[#"Content-Type"="application/json",
@@ -48,7 +48,7 @@ CheckStatus = (token,location) =>
 
 GetData = (token,jobId) =>
     let
-        endpoint = "https://selectapi.datascope.refinitiv.com/RestApi/v1/Extractions/RawExtractionResults('" & jobId & "')/$value",
+        endpoint = "https://selectapi.datascope.lseg.com/RestApi/v1/Extractions/RawExtractionResults('" & jobId & "')/$value",
         Source = Csv.Document(Web.Contents(
                 endpoint, 
                 [Headers=
@@ -61,7 +61,7 @@ GetData = (token,jobId) =>
 
 ExtractRTH_TimeSeries = (token, ric) =>
     let
-        endpoint = "https://selectapi.datascope.refinitiv.com/RestApi/v1/Extractions/ExtractRaw",
+        endpoint = "https://selectapi.datascope.lseg.com/RestApi/v1/Extractions/ExtractRaw",
         body = 
         "{
             ""ExtractionRequest"": 
@@ -115,7 +115,7 @@ ExtractRTH_TimeSeries = (token, ric) =>
 
 ExtractDSS_Intraday= (token, ric) =>
     let
-        endpoint = "https://selectapi.datascope.refinitiv.com/RestApi/v1/Extractions/ExtractRaw",
+        endpoint = "https://selectapi.datascope.lseg.com/RestApi/v1/Extractions/ExtractRaw",
         body = 
     "{
       ""ExtractionRequest"": 
@@ -229,3 +229,4 @@ DSSDemoExtension.Icons = [
     Icon16 = { Extension.Contents("DSSDemoExtension16.png"), Extension.Contents("DSSDemoExtension20.png"), Extension.Contents("DSSDemoExtension24.png"), Extension.Contents("DSSDemoExtension32.png") },
     Icon32 = { Extension.Contents("DSSDemoExtension32.png"), Extension.Contents("DSSDemoExtension40.png"), Extension.Contents("DSSDemoExtension48.png"), Extension.Contents("DSSDemoExtension64.png") }
 ];
+
